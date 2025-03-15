@@ -8,8 +8,8 @@ public class Question {
     private boolean answer;
 
     public Question(@StringRes int textResId, boolean answer) {
-        textResId = textResId;
-        answer = answer;
+        this.textResId = textResId;
+        this.answer = answer;
     }
 
     public int getTextResId() {

@@ -1,7 +1,8 @@
 package com.example.geoquizjava;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,17 +13,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button trueButton;
-    private Button falseButton;
-    private Button nextButton;
-    private Button prevButton;
     private TextView questionTextView;
 
-    private ArrayList<Question> questionBank;
+    private final List<Question> questionBank = Stream.of(
+            new Question(R.string.question_australia, true),
+            new Question(R.string.question_oceans, true),
+            new Question(R.string.question_mideast, true),
+            new Question(R.string.question_africa, true),
+            new Question(R.string.question_americas, true),
+            new Question(R.string.question_asia, true)
+        ).collect(Collectors.toList());
 
     private int currentIndex;
 
@@ -30,13 +36,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-
-        questionBank.add(new Question(R.string.question_australia, true));
-        questionBank.add(new Question(R.string.question_oceans, true));
-        questionBank.add(new Question(R.string.question_mideast, true));
-        questionBank.add(new Question(R.string.question_africa, true));
-        questionBank.add(new Question(R.string.question_americas, true));
-        questionBank.add(new Question(R.string.question_asia, true));
 
         setContentView(R.layout.activity_main);
 
@@ -46,46 +45,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        trueButton = findViewById(R.id.true_button);
-        falseButton = findViewById(R.id.false_button);
-        nextButton = findViewById(R.id.next_button);
-        prevButton = findViewById(R.id.prev_button);
+        Button trueButton = findViewById(R.id.true_button);
+        Button falseButton = findViewById(R.id.false_button);
+        Button nextButton = findViewById(R.id.next_button);
+        Button prevButton = findViewById(R.id.prev_button);
         questionTextView = findViewById(R.id.question_text_view);
 
-        trueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswers(true);
-            }
-        });
+        trueButton.setOnClickListener(view -> checkAnswers(true));
 
-        falseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswers(false);
-            }
-        });
+        falseButton.setOnClickListener(view -> checkAnswers(false));
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nextQuestion();
-            }
-        });
+        nextButton.setOnClickListener(view -> nextQuestion());
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                prevQuestion();
-            }
-        });
+        nextButton.setOnClickListener(view -> prevQuestion());
 
-        questionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nextQuestion();
-            }
-        });
+        prevButton.setOnClickListener(view -> prevQuestion());
+
+        questionTextView.setOnClickListener(view -> nextQuestion());
 
         updateQuestion();
     }
@@ -101,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prevQuestion(){
-        currentIndex = (currentIndex - 1) % questionBank.size();
+        //currentIndex = (currentIndex - 1) % questionBank.size();
+        currentIndex = (questionBank.size() + (currentIndex - 1)) % questionBank.size();
         updateQuestion();
     }
 
@@ -110,6 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         String MessageResId = userAnswer == correctAnswer ? "Верно!" : "Неверно!";
 
-        Toast.makeText(this, MessageResId, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, MessageResId, LENGTH_SHORT).show();
     }
 }
