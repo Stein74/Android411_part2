@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="div_caption">/</string>
+    <string name="plus_caption">+</string>
+    <string name="minus_caption">-</string>
+    <string name="mul_caption">*</string>
+    <string name="default_text">0</string>
+</resources>
