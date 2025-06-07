@@ -72,6 +72,7 @@ public class CardFragment extends Fragment {
         pathHolder = view.findViewById(R.id.tv_sd_path_holder);
 
         String sdCard = System.getenv("SECONDARY_STORAGE");
+        //++++
 
         if (sdCard != null) {
             storage = new File(sdCard);
