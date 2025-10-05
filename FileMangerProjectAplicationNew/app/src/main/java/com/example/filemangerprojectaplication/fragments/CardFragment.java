@@ -2,17 +2,13 @@ package com.example.filemangerprojectaplication.fragments;
 
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.filemangerprojectaplication.R;
-
-import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,11 +25,6 @@ public class CardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    File storage;
-    String data;
-    private TextView tvPathHolder;
-    View view;
 
     public CardFragment() {
         // Required empty public constructor
@@ -69,23 +60,7 @@ public class CardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.fragment_card, container, false);
-
-     /*   tvPathHolder = view.findViewById(R.id.tv_card_path_holder);
-
-        File[] sdCards = ContextCompat.getExternalFilesDirs(getContext(), null);
-        if (sdCards[1] != null) {
-            storage = sdCards[1];
-
-            if (getArguments() != null) {
-                data = getArguments().getString("path");
-                storage = new File(data);
-            }
-
-            tvPathHolder.setText(storage.getAbsolutePath());
-        }*/
-
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_card, container, false);
     }
 }

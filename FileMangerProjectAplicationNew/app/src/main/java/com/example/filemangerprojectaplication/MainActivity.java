@@ -3,28 +3,29 @@ package com.example.filemangerprojectaplication;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.filemangerprojectaplication.fragments.CardFragment;
 import com.example.filemangerprojectaplication.fragments.InternalFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     public List<StorageVolume> storageList = new ArrayList<>(2);
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +47,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
 
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        File[] files = null;
+//        toggle.syncState(); //чтобы иконка появилась.
+
+
         StorageManager sm = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
         List<StorageVolume> storageVolumes = sm.getStorageVolumes();
 
         storageList = sm.getStorageVolumes();
+        //replaceFragment(new InternalFragment());
 
         NavigationView nv = findViewById(R.id.nav_view);
         var menu = nv.getMenu();
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 
     private void openFileFragment(MenuItem i) {

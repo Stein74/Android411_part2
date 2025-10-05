@@ -11,9 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -39,9 +40,17 @@ import com.example.filemangerprojectaplication.OnFileSelectedListener;
 import com.example.filemangerprojectaplication.R;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.List;
 
 public class InternalFragment extends Fragment implements OnFileSelectedListener {
@@ -67,11 +76,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
         imgBack = view.findViewById(R.id.img_back);
         tvPathHolder = view.findViewById(R.id.tv_path_holder);
 
-//        // Получаем доступ к внутренней SD-карте
-/*        String internalStorage = System.getenv("EXTERNAL_STORAGE");
-        storage = new File(internalStorage);*/
-
-        if(getArguments() != null){
+        if (getArguments() != null) {
             data = getArguments().getString("path");
             storage = new File(data);
         }
@@ -85,24 +90,27 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     private void runtimePermission() {
         // Разрешение до Android 10 (API 29)
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
             }
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+            }
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 displayFiles();
             }
         }
         // Разрешения для Android 11 (API 30) и выше
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (!Environment.isExternalStorageManager()) {
-                try{
+                try {
                     Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
                     Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                     intent.setData(uri);
                     intent.addCategory("android.intent.category.DEFAULT");
                     intent.setData(Uri.parse(String.format("package:%s", getActivity().getPackageName())));
                     getActivity().startActivityIfNeeded(intent, 101);
-                } catch (Exception e){
+                } catch (Exception e) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                     getActivity().startActivityIfNeeded(intent, 101);
@@ -114,26 +122,26 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
         }
     }
 
-    public ArrayList<File> findFiles(File file){
+    public ArrayList<File> findFiles(File file) {
         ArrayList<File> arrayList = new ArrayList<>();
         File[] files = file.listFiles();
 
-        for (File singleFile : files){
-            if(singleFile.isDirectory() && !singleFile.isHidden()){
+        for (File singleFile : files) {
+            if (singleFile.isDirectory() && !singleFile.isHidden()) {
                 arrayList.add(singleFile);
             }
         }
 
-        for(File singleFile : files){
-            if(singleFile.getName().toLowerCase().endsWith(".jpeg") ||
-               singleFile.getName().toLowerCase().endsWith(".jpg") ||
-               singleFile.getName().toLowerCase().endsWith(".png") ||
-               singleFile.getName().toLowerCase().endsWith(".mp3") ||
-               singleFile.getName().toLowerCase().endsWith(".wav") ||
-               singleFile.getName().toLowerCase().endsWith(".mp4") ||
-               singleFile.getName().toLowerCase().endsWith(".pdf") ||
-               singleFile.getName().toLowerCase().endsWith(".doc") ||
-               singleFile.getName().toLowerCase().endsWith(".apk")){
+        for (File singleFile : files) {
+            if (singleFile.getName().toLowerCase().endsWith(".jpeg") ||
+                    singleFile.getName().toLowerCase().endsWith(".jpg") ||
+                    singleFile.getName().toLowerCase().endsWith(".png") ||
+                    singleFile.getName().toLowerCase().endsWith(".mp3") ||
+                    singleFile.getName().toLowerCase().endsWith(".wav") ||
+                    singleFile.getName().toLowerCase().endsWith(".mp4") ||
+                    singleFile.getName().toLowerCase().endsWith(".pdf") ||
+                    singleFile.getName().toLowerCase().endsWith(".doc") ||
+                    singleFile.getName().toLowerCase().endsWith(".apk")) {
                 arrayList.add(singleFile);
             }
         }
@@ -153,7 +161,7 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
 
     @Override
     public void onFileClicked(File file) {
-        if(file.isDirectory()){
+        if (file.isDirectory()) {
             Bundle bundle = new Bundle();
             bundle.putString("path", file.getAbsolutePath());
             InternalFragment internalFragment = new InternalFragment();
@@ -166,101 +174,164 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
     }
 
     @Override
-    public void onFileLongClicked(File file) {
-        final Dialog option_dialog = new Dialog(getContext());
-        option_dialog.setContentView(R.layout.option_dialog);
-        option_dialog.setTitle("Select options.");
-        ListView options = option_dialog.findViewById(R.id.list);
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == -1){
+            Uri fileUri = data.getData();
+
+            final int takeFlags = data.getFlags() &
+                    (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            getContext().getContentResolver().takePersistableUriPermission(fileUri,
+                            (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION));
+
+            // Переименовываем файл
+            boolean result = renameFileSAF(fileUri, "newfilename.txt");
+            Toast.makeText(getContext(), result ? "Rename success" : "Rename failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean renameFileSAF(Uri fileUri, String newName) {
+        DocumentFile documentFile = null;
+        DocumentFile docTree = DocumentFile.fromSingleUri(getContext(), fileUri);
+
+        for (DocumentFile f : docTree.listFiles()) {
+            if ("jj.jpg".equals(f.getName())) {
+                documentFile = f;
+                break;
+            }
+        }
+        if (documentFile != null) {
+            boolean success = documentFile.renameTo("newfilename.txt");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onFileLongClicked(File file, int position) {
+        final Dialog optionDialog = new Dialog(getContext());
+        optionDialog.setContentView(R.layout.option_dialog);
+        optionDialog.setTitle("Select Options.");
+        ListView options = optionDialog.findViewById(R.id.list);
 
         CustomAdapter customAdapter = new CustomAdapter();
         options.setAdapter(customAdapter);
+        optionDialog.show();
 
-        option_dialog.show();
+
 
         options.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                switch (selectedItem){
+
+                switch (selectedItem) {
                     case "Details":
                         AlertDialog.Builder detailDialog = new AlertDialog.Builder(getContext());
                         detailDialog.setTitle("Details:");
-
                         final TextView details = new TextView(getContext());
                         detailDialog.setView(details);
                         Date lastModified = new Date(file.lastModified());
                         SimpleDateFormat formatted = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                        String formattedeDate = formatted.format(lastModified);
+                        String formattedDate = formatted.format(lastModified);
 
-                        details.setText("File name: " + file.getName() + "\n" + "Size: " + Formatter.formatFileSize(getContext(), file.length())
-                        + "\n" + "Path: " + file.getAbsolutePath() + "\n" + "Last modifaed: " + formattedeDate);
+                        details.setText(String.format(
+                                "File Name: %s\nSize: %s\nPath: %s\nLast Modified: %s", file.getName(), Formatter.formatShortFileSize(getContext(), file.length()), file.getAbsolutePath(), formattedDate)
+                        );
+
                         details.setPadding(70, 10, 10, 10);
-                        detailDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                        detailDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                option_dialog.cancel();
+                                optionDialog.cancel();
+//                                optionDialog.closeOptionsMenu();
                             }
                         });
 
                         AlertDialog alertDialogDetails = detailDialog.create();
                         alertDialogDetails.show();
                         break;
+
+
                     case "Rename":
-                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-                            Boolean res = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
-                            System.out.println("aa");
-                        }
-                        AlertDialog.Builder renameDialog = new AlertDialog.Builder(getContext());
-                        renameDialog.setTitle("Rename file:");
-                        final EditText name = new EditText(getContext());
-                        renameDialog.setView(name);
+                        AlertDialog.Builder renameDialog = new AlertDialog.Builder(getContext());// renameDialog просто название
+                        renameDialog.setTitle("Rename File:"); // в renameDialog устанваливаем текст (Title - внимательно, не setText!)
+                        final EditText name = new EditText(getContext()); // создаем редактируемый текст в переменной name
+                        renameDialog.setView(name); // обращаемся к renameDialog через метод setView и передаем в него значение name
 
                         renameDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String newName = name.getEditableText().toString();
-                                String extention = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("."));
 
-                                File current = new File(file.getAbsolutePath());
-//                                Uri fileUri = FileProvider.getUriForFile(getContext(), getContext().getPackageName(), file);//Uri.fromFile(file);
-                                File dest = new File(file.getAbsolutePath().replace(file.getName(), newName) + extention);
-                                Boolean res = current.canWrite();
-                                if (current.renameTo(dest)){ //mark
-//                                    fileList.set(position, dest);
-//                                    fileAdapter.notifyItemChanged(position);
-                                    displayFiles();
-                                    Toast.makeText(getContext(), "Renamed", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getContext(), "Rename failed", Toast.LENGTH_SHORT).show();
+                                String newName = name.getEditableText().toString().trim();
+                                File parentDir = file.getParentFile(); // Получаем папку, в которой лежит переименовываемый файл/папка.
+
+                                String extension = "";
+                                if (file.isFile()) {
+                                    int dotIndex = file.getName().lastIndexOf(".");
+                                    if (dotIndex != -1) {
+                                        extension = file.getName().substring(dotIndex);
+                                    }
                                 }
-                                /*DocumentFile docFile = DocumentFile.fromSingleUri(getContext(), fileUri);
-                                if (docFile != null && docFile.canWrite()){
-                                    docFile.renameTo(newName);
-                                } else if (docFile == null) {
-                                    Toast.makeText(getContext(), "docFile is undefined", Toast.LENGTH_SHORT).show();
-                                } else if (!docFile.canWrite()) {
-                                    Toast.makeText(getContext(), "docFile can't wright", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getContext(), "unknown error", Toast.LENGTH_SHORT).show();
-                                }*/
+
+                                File destination = new File(parentDir, newName + extension);
+
+                                Boolean ext = file.exists();
+                                Boolean cWr = file.canWrite();
+
+                                if (file.renameTo(destination)) {
+                                    Toast.makeText(getContext(), "Renamed!", Toast.LENGTH_SHORT).show();
+                                    displayFiles();
+                                } else {
+                                    Toast.makeText(getContext(), "Rename Error!", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                                    //intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                    startActivityForResult(intent, 100);
+                                }
                             }
                         });
                         renameDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
+                                optionDialog.cancel();
+                            }
+                        });
+                        AlertDialog alertDialogRenaime = renameDialog.create();
+                        alertDialogRenaime.show();
+                        break;
+
+
+                    case "Delete":
+                        AlertDialog.Builder deleteDialog = new AlertDialog.Builder(getContext());
+                        deleteDialog.setTitle("Delete " + file.getName() + "?");
+
+                        deleteDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                file.delete();
+                                displayFiles();
+                                Toast.makeText(getContext(), "Deleted file: " + file.getName(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
-                        AlertDialog alertDialogRename = renameDialog.create();
-                        alertDialogRename.show();
+                        deleteDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                optionDialog.cancel();
+                            }
+                        });
+
+                        AlertDialog alertDialogDelete = deleteDialog.create();
+                        alertDialogDelete.show();
                         break;
                 }
             }
         });
     }
 
-    class CustomAdapter extends BaseAdapter{
+    class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -280,14 +351,15 @@ public class InternalFragment extends Fragment implements OnFileSelectedListener
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             @SuppressLint("ViewHolder") View myView = getLayoutInflater().inflate(R.layout.option_layout, null);
-            @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView txtOptions = myView.findViewById(R.id.txt_option);
-            @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView imgOptions = myView.findViewById(R.id.img_option);
+            TextView txtOptions = myView.findViewById(R.id.txt_option);
+            ImageView imgOptions = myView.findViewById(R.id.img_option);
+
             txtOptions.setText(items[position]);
-            if (items[position].equals("Details")){
-                imgOptions.setImageResource(R.drawable.baseline__info_outline_24);
-            } else if (items[position].equals("Rename")){
+            if (items[position].equals("Details")) {
+                imgOptions.setImageResource(R.drawable.baseline_info_outline_24);
+            } else if (items[position].equals("Rename")) {
                 imgOptions.setImageResource(R.drawable.baseline_drive_file_rename_outline_24);
-            } else if (items[position].equals("Delete")){
+            } else if (items[position].equals("Delete")) {
                 imgOptions.setImageResource(R.drawable.baseline_delete_forever_24);
             }
 
