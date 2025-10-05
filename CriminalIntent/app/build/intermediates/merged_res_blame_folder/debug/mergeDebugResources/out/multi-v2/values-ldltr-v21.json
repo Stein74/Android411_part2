@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.bignerdranch.android.criminalintent.app-mergeDebugResources-30:/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\User\\.gradle\\caches\\8.13\\transforms\\b23319b21498a9a34077f0574c35e3c5\\transformed\\appcompat-1.6.1\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

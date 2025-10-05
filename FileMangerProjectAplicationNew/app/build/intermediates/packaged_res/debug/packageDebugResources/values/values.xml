@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="dark_gray">#6A6A6A</color>
+    <color name="dark_green">#556600</color>
+    <color name="green">#BBFF00</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">FileMangerProjectAplication</string>
+    <string name="close_drawer">Close Navigation Drawer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_drawer">Open Navigation Drawer</string>
+    <style name="Base.Theme.FileMangerProjectAplication" parent="Theme.Material3.DayNight.NoActionBar">
+        
+         <item name="colorPrimary">@color/dark_green</item>
+    </style>
+    <style name="Theme.FileMangerProjectAplication" parent="Base.Theme.FileMangerProjectAplication"/>
+</resources>

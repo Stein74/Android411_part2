@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">CriminalIntent</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+    <string name="crime_title_hint">Enter a title for the crime.</string>
+    <string name="crime_title_label">Title</string>
+    <style name="Base.Theme.CriminalIntent" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="BigtextSize">
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">3dp</item>
+    </style>
+    <style name="Theme.CriminalIntent" parent="Base.Theme.CriminalIntent"/>
+</resources>

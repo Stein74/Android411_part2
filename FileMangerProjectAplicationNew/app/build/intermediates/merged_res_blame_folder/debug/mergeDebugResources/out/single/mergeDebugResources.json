@@ -1,0 +1,186 @@
+[
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_file_container.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\file_container.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\xml_provider_paths.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\xml\\provider_paths.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_option_dialog.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\option_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\menu_nav_menu.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\menu\\nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_folder_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_folder_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_android_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_android_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_ondemand_video_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_ondemand_video_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-anydpi\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_sd_card_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_sd_card_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_fragment_card.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\fragment_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_fragment_internal.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\fragment_internal.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_done_outline_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_done_outline_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_arrow_drop_down_circle_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_arrow_drop_down_circle_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_device_unknown_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_device_unknown_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_browser_updated_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_browser_updated_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_bg_border.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\bg_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_edit_document_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_edit_document_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-anydpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_option_layout.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\option_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_menu_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_menu_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\layout_nav_header.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\layout\\nav_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline__info_outline_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline__info_outline_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_info_outline_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_info_outline_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_info_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_info_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_drive_file_rename_outline_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_drive_file_rename_outline_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_display_settings_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_display_settings_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_picture_as_pdf_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_picture_as_pdf_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_delete_forever_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_delete_forever_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_library_music_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_library_music_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\drawable_baseline_broken_image_24.xml.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\drawable\\baseline_broken_image_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-debug-32:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\User\\.gradle\\daemon\\8.10.2\\com.example.filemangerprojectaplication.app-main-34:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.filemangerprojectaplication.app-debug-32:/xml_provider_paths.xml.flat",
+        "source": "com.example.filemangerprojectaplication.app-main-34:/xml/provider_paths.xml"
+    }
+]
