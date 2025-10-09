@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class DificultyDialog extends DialogFragment {
+public class DifficultyDialog extends DialogFragment {
 
     private RadioButton buttonEasy, buttonHard;
     private Button buttonOk;

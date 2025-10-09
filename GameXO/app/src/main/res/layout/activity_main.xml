@@ -64,11 +64,22 @@
             android:layout_marginTop="20dp"/>
 
         <Button
+            android:id="@+id/difficultyButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/difficulty"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            app:cornerRadius="20dp"
+            />
+
+        <Button
             android:id="@+id/startGameButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/start_game"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:textSize="18sp"
             app:cornerRadius="20dp"

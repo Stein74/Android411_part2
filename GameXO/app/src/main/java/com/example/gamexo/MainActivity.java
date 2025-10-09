@@ -7,13 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static int fieldSize = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         EditText playerOne = findViewById(R.id.playerOne);
         EditText playerTwo = findViewById(R.id.playerTwo);
         Button startGameButton = findViewById(R.id.startGameButton);
+        Button difficultyButton = findViewById(R.id.difficultyButton);
 
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,8 +37,18 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, PlayingField.class);
                     intent.putExtra("playerOne", getPlayerOneName);
                     intent.putExtra("playerTwo", getPlayerTwoName);
+                    intent.putExtra("fieldSize", fieldSize);
                     startActivity(intent);
                 }
+            }
+        });
+
+        difficultyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                DifficultyDialog difficultyDialog = new DifficultyDialog();
+                difficultyDialog.show(fragmentManager, "difficulty_dialog");
             }
         });
     }

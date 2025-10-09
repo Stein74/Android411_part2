@@ -6,11 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +19,14 @@ public class PlayingField extends AppCompatActivity {
     private TextView playerTwoName;
 
     private int activePlayer = 1;
-    private int[] boxPositions = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] boxPositions;// = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int totalSelectBoxes = 1;
+    private int fieldSize;
 
-    private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9;
+    /*private ImageView image1, image2, image3, image4, image5, image6, image7, image8, image9,
+    image10, image11, image12, image13, image14, image15, image16, image17, image18, image19;*/
+
+    private ImageView[] imageViewes;
 
     private int currentScoreOne= 0;
     private int currentScoreTwo = 0;
@@ -34,20 +34,58 @@ public class PlayingField extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playing_field);
+
+        fieldSize = getIntent().getIntExtra("fieldSize", 3);
+        boxPositions = new int[fieldSize * fieldSize];
+
+        switch (fieldSize) {
+
+            case 5:
+                setContentView(R.layout.activity_playing_field_5);
+
+                combinationList.add(new int[]{0, 1, 2, 3, 4});
+                combinationList.add(new int[]{5, 6, 7, 8, 9});
+                combinationList.add(new int[]{10, 11, 12, 13, 14});
+                combinationList.add(new int[]{15, 16, 17, 18, 19});
+                combinationList.add(new int[]{20, 21, 22, 23, 24});
+                combinationList.add(new int[]{0, 5, 10, 15, 20});
+                combinationList.add(new int[]{1, 6, 11, 16, 21});
+                combinationList.add(new int[]{2, 7, 12, 17, 22});
+                combinationList.add(new int[]{3, 8, 13, 18, 23});
+                combinationList.add(new int[]{4, 9, 14, 19, 24});
+                combinationList.add(new int[]{0, 6, 12, 18, 24});
+                combinationList.add(new int[]{4, 8, 12, 16, 20});
+
+                break;
+            default:
+                setContentView(R.layout.activity_playing_field_3);
+
+                combinationList.add(new int[]{0, 1, 2});
+                combinationList.add(new int[]{3, 4, 5});
+                combinationList.add(new int[]{6, 7, 8});
+                combinationList.add(new int[]{0, 3, 6});
+                combinationList.add(new int[]{1, 4, 7});
+                combinationList.add(new int[]{2, 5, 8});
+                combinationList.add(new int[]{0, 4, 8});
+                combinationList.add(new int[]{2, 4, 6});
+        }
+
+        imageViewes = new ImageView[MainActivity.fieldSize * MainActivity.fieldSize];
+        for (int i = 1; i <= imageViewes.length; i++) {
+            int resId = getResources().getIdentifier("image" + (i), "id", getPackageName());
+            var view = findViewById(resId);
+            final int index = i - 1;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    performAction((ImageView) v, index);
+                }
+            });
+            imageViewes[index] = (ImageView) view;
+        }
 
         playerOneName = findViewById(R.id.playerOneName);
         playerTwoName = findViewById(R.id.playerTwoName);
-
-        combinationList.add(new int[]{0, 1, 2});
-        combinationList.add(new int[]{3, 4, 5});
-        combinationList.add(new int[]{6, 7, 8});
-        combinationList.add(new int[]{0, 3, 6});
-        combinationList.add(new int[]{1, 4, 7});
-        combinationList.add(new int[]{2, 5, 8});
-        combinationList.add(new int[]{0, 4, 8});
-        combinationList.add(new int[]{2, 4, 6});
-
 
         String getPlayerOneName = getIntent().getStringExtra("playerOne");
         String getPlayerTwoName = getIntent().getStringExtra("playerTwo");
@@ -55,7 +93,7 @@ public class PlayingField extends AppCompatActivity {
         playerOneName.setText(getPlayerOneName);
         playerTwoName.setText(getPlayerTwoName);
 
-        image1 = findViewById(R.id.image1);
+        /*image1 = findViewById(R.id.image1);
         image2 = findViewById(R.id.image2);
         image3 = findViewById(R.id.image3);
         image4 = findViewById(R.id.image4);
@@ -63,11 +101,11 @@ public class PlayingField extends AppCompatActivity {
         image6 = findViewById(R.id.image6);
         image7 = findViewById(R.id.image7);
         image8 = findViewById(R.id.image8);
-        image9 = findViewById(R.id.image9);
+        image9 = findViewById(R.id.image9);*/
 
         changePlayerTurn(activePlayer);
 
-        image1.setOnClickListener(new View.OnClickListener() {
+/*        image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isBoxSelectable(0)) {
@@ -146,7 +184,7 @@ public class PlayingField extends AppCompatActivity {
                     performAction((ImageView) v, 8);
                 }
             }
-        });
+        });*/
 
 
     }
@@ -172,7 +210,7 @@ public class PlayingField extends AppCompatActivity {
 
                 currentScoreOne++;
                 scorePlayerA.setText(String.valueOf(currentScoreOne));
-            } else if (totalSelectBoxes == 9){
+            } else if (totalSelectBoxes == fieldSize * fieldSize){
                 ResultDialog resultDialog = new ResultDialog(PlayingField.this, "Match Draw", PlayingField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
@@ -190,7 +228,7 @@ public class PlayingField extends AppCompatActivity {
 
                 currentScoreTwo++;
                 scorePlayerB.setText(String.valueOf(currentScoreTwo));
-            } else if (totalSelectBoxes == 9){
+            } else if (totalSelectBoxes == fieldSize * fieldSize){
                 ResultDialog resultDialog = new ResultDialog(PlayingField.this, "Match Draw", PlayingField.this);
                 resultDialog.setCancelable(false);
                 resultDialog.show();
@@ -203,12 +241,17 @@ public class PlayingField extends AppCompatActivity {
 
     private boolean checkResults(){
         boolean response = false;
-        for (int i = 0; i < combinationList.size(); i++) {
+        for (int i = 0; i < combinationList.size() && !response; i++) {
             final  int[] combination = combinationList.get(i);
 
-            if(boxPositions[combination[0]]  == activePlayer && boxPositions[combination[1]]  == activePlayer && boxPositions[combination[2]]  == activePlayer){
-                response = true;
+//            if(boxPositions[combination[0]]  == activePlayer && boxPositions[combination[1]]  == activePlayer && boxPositions[combination[2]]  == activePlayer){
+//                response = true;
+//            }
+            boolean res = true;
+            for (int j = 0; j < fieldSize && res; j++) {
+                res = boxPositions[combination[j]] == activePlayer;
             }
+            response = res;
         }
         return response;
     }
@@ -238,11 +281,12 @@ public class PlayingField extends AppCompatActivity {
     }
 
     public void restartMatch() {
-        boxPositions = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+        //boxPositions = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+        boxPositions = new int[fieldSize * fieldSize];
         activePlayer = 1;
         totalSelectBoxes = 1;
 
-        image1 = findViewById(R.id.image1);
+/*        image1 = findViewById(R.id.image1);
         image2 = findViewById(R.id.image2);
         image3 = findViewById(R.id.image3);
         image4 = findViewById(R.id.image4);
@@ -260,6 +304,13 @@ public class PlayingField extends AppCompatActivity {
         image6.setImageResource(R.drawable.white_box);
         image7.setImageResource(R.drawable.white_box);
         image8.setImageResource(R.drawable.white_box);
-        image9.setImageResource(R.drawable.white_box);
+        image9.setImageResource(R.drawable.white_box);*/
+
+        for (int i = 0; i < imageViewes.length; i++) {
+//            int resId = getResources().getIdentifier("image" + (i), "id", getPackageName());
+//            ImageView view = findViewById(resId);
+//            imageViewes[i] = view;
+            imageViewes[i].setImageResource(R.drawable.white_box);
+        }
     }
 }
